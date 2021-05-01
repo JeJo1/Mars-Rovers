@@ -8,7 +8,7 @@ public:
 	//virtual int getPositionOf(T*) const = 0;
 	virtual T* peekFirst() const = 0;
 	virtual bool removeFirst(T*&) = 0;
-	//virtual T* getItemAt(int) const = 0;
+	virtual T* getItemAt(int) const = 0;
 	virtual void insert(T*) = 0;
 	virtual void insertLast(T*) = 0;
 	virtual bool remove(T*) = 0;

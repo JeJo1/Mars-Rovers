@@ -88,14 +88,14 @@ public:
 		return true;
 	}
 
-	/*T* getItemAt(int pos) const {
+	T* getItemAt(int pos) const {
 		Node<T>* ptr = getNodeAt(pos);
 
 		if (!ptr)
 			return NULL;
 
 		return ptr->getData();
-	}*/
+	}
 
 	void insert(T* itm) {
 		if (!head) {

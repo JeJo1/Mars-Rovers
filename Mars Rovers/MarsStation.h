@@ -5,19 +5,16 @@
 #include "DataStructures\PriorityQueue.h"
 
 //#include "Event.h"
-//#include "EmergencyMission.h"
-//#include "MountainousMission.h"
-//#include "PolarMission.h"
+#include "EmergencyMission.h"
+#include "MountainousMission.h"
+#include "PolarMission.h"
 //#include "EmergencyRover.h"
 //#include "MountainousRover.h"
 //#include "PolarRover.h"
 
-class Mission;//
+
 class Rover;//
 class Event;//
-class EmergencyMission;//
-class MountainousMission;//
-class PolarMission;//
 class EmergencyRover;//
 class MountainousRover;//
 class PolarRover;//
@@ -37,9 +34,11 @@ private:
 	Queue<EmergencyRover> eRCL;				//Emergency Rovers Checkup List
 	Queue<MountainousRover> mRCL;			//Mountainous Rovers Checkup List
 	Queue<PolarRover> pRCL;					//Polar Rovers Checkup List
-	List<Rover> RPL;						//Rovers in Progress List
+	//List<Rover> RPL;						//Rovers in Progress List
 	int currentDay;
 public:
-	MarsStation() {
+	MarsStation() 
+	{
+		currentDay = 0;
 	}
 };

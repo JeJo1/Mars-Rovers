@@ -13,6 +13,7 @@ public:
 	Node(Node<T>* newNext = NULL, T* newData = NULL) {
 		next = newNext;
 		data = newData;
+		priority = 0;
 	}
 
 	Node<T>* getNext() const {

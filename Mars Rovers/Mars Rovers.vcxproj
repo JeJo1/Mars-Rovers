@@ -149,7 +149,11 @@
     <ClInclude Include="DataStructures\PriorityQueueADT.h" />
     <ClInclude Include="DataStructures\Queue.h" />
     <ClInclude Include="DataStructures\QueueADT.h" />
+    <ClInclude Include="EmergencyMission.h" />
     <ClInclude Include="MarsStation.h" />
+    <ClInclude Include="Mission.h" />
+    <ClInclude Include="MountainousMission.h" />
+    <ClInclude Include="PolarMission.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
