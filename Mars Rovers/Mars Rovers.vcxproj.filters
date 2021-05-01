@@ -16,6 +16,12 @@
     <Filter Include="Header Files\DataStructures">
       <UniqueIdentifier>{738cc427-78c9-461b-8067-79e546c39939}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Rovers">
+      <UniqueIdentifier>{3575da9d-6343-4ff7-a4e5-20d6a69681e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Missions">
+      <UniqueIdentifier>{2cebca8c-769b-4d01-8422-0831dc1a7663}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -47,17 +53,29 @@
     <ClInclude Include="DataStructures\QueueADT.h">
       <Filter>Header Files\DataStructures</Filter>
     </ClInclude>
-    <ClInclude Include="Mission.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Rover.h">
+      <Filter>Header Files\Rovers</Filter>
     </ClInclude>
-    <ClInclude Include="MountainousMission.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="PolarRover.h">
+      <Filter>Header Files\Rovers</Filter>
     </ClInclude>
-    <ClInclude Include="PolarMission.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="MountainousRover.h">
+      <Filter>Header Files\Rovers</Filter>
+    </ClInclude>
+    <ClInclude Include="EmergencyRover.h">
+      <Filter>Header Files\Rovers</Filter>
     </ClInclude>
     <ClInclude Include="EmergencyMission.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Missions</Filter>
+    </ClInclude>
+    <ClInclude Include="Mission.h">
+      <Filter>Header Files\Missions</Filter>
+    </ClInclude>
+    <ClInclude Include="MountainousMission.h">
+      <Filter>Header Files\Missions</Filter>
+    </ClInclude>
+    <ClInclude Include="PolarMission.h">
+      <Filter>Header Files\Missions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

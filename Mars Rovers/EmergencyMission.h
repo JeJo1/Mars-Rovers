@@ -15,15 +15,23 @@ public:
 		//TODO: Construct a priority Eqn and set the priority
 	};
 
-
 	~EmergencyMission() 
 	{
 		Count--;
 	};
 
-	// TODO: Getter for rest of data members;
+	int getPriority() const
+	{
+		return priority;
+	}
 
-	static int getCount() {
+	void setCount(int n)
+	{
+		Count = n;
+	}
+
+	static int getCount() 
+	{
 		return Count;
 	}
 };

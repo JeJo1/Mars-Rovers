@@ -16,6 +16,11 @@ public:
 		Count--;
 	};
 
+	void setCount(int n)
+	{
+		Count = n;
+	}
+
 	static int getCount() {
 		return Count;
 	}

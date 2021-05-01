@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-class Rover;//
+class Rover;
 
 class Mission
 {
@@ -25,15 +25,14 @@ public:
 	void assign(Rover* assigned_r)
 	{
 		r = assigned_r;
-		//r->assign(this);
 	}
 
-	void setWaitingDays(int newWaiting_Days)
+	void setWD(int newWaiting_Days)
 	{
 		Waiting_Days = newWaiting_Days;
 	}
 
-	void setExecutionDays(int newExecution_Days)
+	void setED(int newExecution_Days)
 	{
 		Execution_Days = newExecution_Days;
 	}
@@ -43,9 +42,47 @@ public:
 		return Formulation_Day + Waiting_Days + Execution_Days <= obj.Formulation_Day + obj.Waiting_Days + obj.Execution_Days;
 	}
 
-	bool operator == (int id) {
+	bool operator == (int id) 
+	{
 		return ID == id;
 	}
 
-	//TODO: Getter funcions for all data memebers
+	int getFD() const
+	{
+		return Formulation_Day;
+	}
+
+	int getID() const
+	{
+		return ID;
+	}
+
+	int getTLOC() const 
+	{
+		return Target_Location;
+	}
+
+	int getMDUR() const
+	{
+		return Mission_Duration;
+	}
+
+	int getSIG() const
+	{
+		return Significance;
+	}
+
+	int getWD() const
+	{
+		return Waiting_Days;
+	}
+
+	int getED() const
+	{
+		return Execution_Days;
+	}
+
+	int getCD() const {
+		return Formulation_Day + Waiting_Days + Execution_Days;
+	}
 };

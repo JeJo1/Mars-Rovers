@@ -8,16 +8,12 @@
 #include "EmergencyMission.h"
 #include "MountainousMission.h"
 #include "PolarMission.h"
-//#include "EmergencyRover.h"
-//#include "MountainousRover.h"
-//#include "PolarRover.h"
+#include "EmergencyRover.h"
+#include "MountainousRover.h"
+#include "PolarRover.h"
 
 
-class Rover;//
 class Event;//
-class EmergencyRover;//
-class MountainousRover;//
-class PolarRover;//
 
 
 class MarsStation{
@@ -34,7 +30,7 @@ private:
 	Queue<EmergencyRover> eRCL;				//Emergency Rovers Checkup List
 	Queue<MountainousRover> mRCL;			//Mountainous Rovers Checkup List
 	Queue<PolarRover> pRCL;					//Polar Rovers Checkup List
-	//List<Rover> RPL;						//Rovers in Progress List
+	List<Rover> RPL;						//Rovers in Progress List
 	int currentDay;
 public:
 	MarsStation() 
