@@ -142,6 +142,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CancelEvent.h" />
     <ClInclude Include="DataStructures\List.h" />
     <ClInclude Include="DataStructures\ListADT.h" />
     <ClInclude Include="DataStructures\Node.h" />
@@ -151,12 +152,15 @@
     <ClInclude Include="DataStructures\QueueADT.h" />
     <ClInclude Include="EmergencyMission.h" />
     <ClInclude Include="EmergencyRover.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="FormulationEvent.h" />
     <ClInclude Include="MarsStation.h" />
     <ClInclude Include="Mission.h" />
     <ClInclude Include="MountainousMission.h" />
     <ClInclude Include="MountainousRover.h" />
     <ClInclude Include="PolarMission.h" />
     <ClInclude Include="PolarRover.h" />
+    <ClInclude Include="PrompteEvent.h" />
     <ClInclude Include="Rover.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
