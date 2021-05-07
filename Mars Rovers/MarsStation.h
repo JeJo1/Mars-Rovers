@@ -37,4 +37,21 @@ public:
 	{
 		currentDay = 0;
 	}
+
+	PriorityQueue<EmergencyMission>& getEMWL()
+	{
+		return eMWL;
+	}
+
+	List<MountainousMission>& getMMWL()
+	{
+		return mMWL;
+	}
+
+	Queue<PolarMission>& getPMWL()
+	{
+		return pMWL;
+	}
+
+
 };

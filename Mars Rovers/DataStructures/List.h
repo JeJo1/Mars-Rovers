@@ -131,13 +131,14 @@ public:
 		ptr->setNext(new Node<T>(NULL, itm));
 	}
 
-	bool remove(T* itm) {
+	template <typename U>
+	bool remove(const U& itm) {
 		if (!head)
 			return false;
 
 		Node <T>* temp;
 
-		if (head->getData() == itm) {
+		if (*head->getData() == itm) {
 			temp = head->getNext();
 			delete head;
 			head = temp;
@@ -145,9 +146,9 @@ public:
 		}
 
 		Node<T>* ptr = head;
-		
+
 		while (ptr->getNext()) {
-			if (ptr->getNext()->getData() == itm) {
+			if (*ptr->getNext()->getData() == itm) {
 				temp = ptr->getNext();
 				ptr->setNext(temp->getNext());
 				delete temp;

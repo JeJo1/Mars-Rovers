@@ -11,7 +11,7 @@ public:
 	{};
 
 	void Excute()
-	{
-
+	{	
+		m->getMMWL().remove(getID());
 	}
 };

@@ -11,7 +11,8 @@ public:
 	virtual T* getItemAt(int) const = 0;
 	virtual void insert(T*) = 0;
 	virtual void insertLast(T*) = 0;
-	virtual bool remove(T*) = 0;
+	template <typename U>
+	bool remove(const U&) {}
 	//virtual bool removeAt(int) = 0;
 	virtual ~ListADT() {};
 };

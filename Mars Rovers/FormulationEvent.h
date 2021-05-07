@@ -19,6 +19,20 @@ public:
 
 	void Excute()
 	{
-
+		if (Typ == 'M')
+		{
+			MountainousMission* mm = new MountainousMission(getED(),getID(),TLoc,MDut,sig);
+			m->getMMWL().insertLast(mm);
+		}
+		else if (Typ == 'P')
+		{
+			PolarMission* pm = new PolarMission(getED(), getID(), TLoc, MDut, sig);
+			m->getPMWL().enqueue(pm);
+		}
+		else if (Typ == 'E')
+		{
+			EmergencyMission* em = new EmergencyMission(getED(), getID(), TLoc, MDut, sig);
+			m->getEMWL().enqueue(em,em->getPriority());
+		}
 	}
 };
