@@ -50,7 +50,7 @@ public:
 		return m;
 	}
 
-	bool operator <= (Rover obj) 
+	bool operator <= (const Rover& obj) const
 	{
 		return *m <= *obj.m;
 	}

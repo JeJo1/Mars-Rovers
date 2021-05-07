@@ -35,7 +35,42 @@ private:
 public:
 	MarsStation() 
 	{
+		MountainousMission* m = new MountainousMission(1, 1, 1, 1, 1);
+		MountainousMission* m2 = new MountainousMission(6, 3, 1, 1, 1);
+		std::cout << mMWL.getLength() << std::endl;
+		mMWL.insertLast(m);
+		mMWL.insertLast(m2);
+		std::cout << mMWL.getLength() << std::endl;
+		mMWL.remove(2);
+		std::cout << mMWL.getLength() << std::endl;
+		mMWL.remove(3);
+		std::cout << mMWL.getLength() << std::endl;
+		MountainousMission* ptr = mMWL.remove(1);
+		std::cout << m << std:: endl;
+		std::cout << ptr << std::endl;
+		std::cout << mMWL.getLength() << std::endl;
+
+
+		Rover r1, r2;
+		r1.assign(m);
+		r2.assign(m2);
+
+		std::cout << RPL.getLength() << std::endl;
+		RPL.insert(&r1);
+		RPL.insert(&r2);
+		
+
+		Rover* ptr1 = RPL.removeFirst();
+		std::cout << RPL.getLength() << std::endl;
+		std::cout << ptr1 << std::endl;
+		std::cout << &r1 << std::endl;
+		RPL.removeFirst();
+
+		std::cout << RPL.getLength() << std::endl;//del
+
+
 		currentDay = 0;
+
 	}
 
 	PriorityQueue<EmergencyMission>& getEMWL()

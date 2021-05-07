@@ -57,3 +57,4 @@ public:
 	
 
 };
+int MountainousMission::Count = 0;//del

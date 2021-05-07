@@ -78,14 +78,15 @@ public:
 		return head->getData();
 	}
 
-	bool removeFirst(T*& itm) {
+	T* removeFirst() {
+		T* data = NULL;
 		if (!head)
-			return false;
-		itm = head->getData();
+			return data;
+		data = head->getData();
 		Node<T>* temp = head->getNext();
 		delete head;
 		head = temp;
-		return true;
+		return data;
 	}
 
 	T* getItemAt(int pos) const {
@@ -132,32 +133,35 @@ public:
 	}
 
 	template <typename U>
-	bool remove(const U& itm) {
+	T* remove(const U& itm) {
+		T* data = NULL;
 		if (!head)
-			return false;
+			return data;
 
 		Node <T>* temp;
 
 		if (*head->getData() == itm) {
+			data = head->getData();
 			temp = head->getNext();
 			delete head;
 			head = temp;
-			return true;
+			return data;
 		}
 
 		Node<T>* ptr = head;
 
 		while (ptr->getNext()) {
 			if (*ptr->getNext()->getData() == itm) {
+				data = ptr->getNext()->getData();
 				temp = ptr->getNext();
 				ptr->setNext(temp->getNext());
 				delete temp;
-				return true;
+				return data;
 			}
 			ptr = ptr->getNext();
 		}
 
-		return false;
+		return data;
 	}
 
 	/*bool removeAt(int pos) {
@@ -194,18 +198,6 @@ public:
 			delete head;
 			head = temp;
 		}
-
-	}
-
-
-	void print() const {//
-		Node <T>* ptr = head;
-
-		while (ptr) {
-			std::cout << *ptr->getData() << " -> ";
-			ptr = ptr->getNext();
-		}
-		std::cout << "NULL" << std::endl;
 
 	}
 };

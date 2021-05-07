@@ -37,12 +37,12 @@ public:
 		Execution_Days = newExecution_Days;
 	}
 
-	bool operator <= (Mission obj) 
+	bool operator <= (const Mission& obj) const
 	{
 		return Formulation_Day + Waiting_Days + Execution_Days <= obj.Formulation_Day + obj.Waiting_Days + obj.Execution_Days;
 	}
 
-	bool operator == (int id) 
+	bool operator == (int id) const
 	{
 		return ID == id;
 	}

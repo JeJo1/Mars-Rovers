@@ -69,16 +69,4 @@ public:
 			}
 	}
 
-
-
-	void print() const {//
-		Node <T>* ptr = head;
-
-		while (ptr) {
-			std::cout << *ptr->getData() << " -> ";
-			ptr = ptr->getNext();
-		}
-		std::cout << "NULL" << std::endl;
-
-	}
 };

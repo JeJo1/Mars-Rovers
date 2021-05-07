@@ -1,8 +1,9 @@
 #pragma once
-#include"MarsStation.h"
+
 #include"DataStructures/List.h"
 #include"DataStructures/Queue.h"
 #include"DataStructures/PriorityQueue.h"
+class MarsStation;
 
 class Event
 {
