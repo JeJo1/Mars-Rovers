@@ -11,9 +11,8 @@ private:
 	int sig;     //The mission’s significance
 public:
 	FormulationEvent(int EventDay, int ID, char Typ, int TLoc, int MDut, int sig)
-		:Event(EventDay, ID), Typ(Typ), TLoc(TLoc), MDut(MDut), sig(sig)
-	{
-	};
+		:Event(EventDay, ID ,m), Typ(Typ), TLoc(TLoc), MDut(MDut), sig(sig)
+	{};
 
 	~FormulationEvent()
 	{};

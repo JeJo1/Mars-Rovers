@@ -5,7 +5,7 @@
 class CancelEvent : public Event
 {
 public:
-	CancelEvent(int EventDay, int ID) :Event(EventDay, ID)
+	CancelEvent(int EventDay, int ID) :Event(EventDay, ID, m)
 	{};
 
 	~CancelEvent()
@@ -13,6 +13,10 @@ public:
 
 	void Excute()
 	{	
-		m->getMMWL().remove(getID());
+		MountainousMission* ptr = m->getMMWL().remove(getID());
+		if (ptr != NULL)
+			delete ptr;
+		else
+			return;
 	}
 };

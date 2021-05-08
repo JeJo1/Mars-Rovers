@@ -13,10 +13,8 @@ private:
 protected:
 	MarsStation* m;
 public:
-	Event(int EventDay, int ID) :EventDay(EventDay), ID(ID)
-	{
-		MarsStation* m;
-	};
+	Event(int EventDay, int ID, MarsStation* m) :EventDay(EventDay), ID(ID), m()
+	{};
 
 	int getED()
 	{

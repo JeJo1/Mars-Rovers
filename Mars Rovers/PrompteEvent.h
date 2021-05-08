@@ -5,7 +5,7 @@
 class PrompteEvent :public Event
 {
 public:
-	PrompteEvent(int EventDay, int ID) :Event(EventDay, ID)
+	PrompteEvent(int EventDay, int ID) :Event(EventDay, ID, m)
 	{};
 
 	~PrompteEvent()
@@ -21,6 +21,7 @@ public:
 			ptr->Promote();
 			EmergencyMission* em = new EmergencyMission(getED(), getID(),em->getTLOC(),em->getMDUR(),em->getSIG());
 			m->getEMWL().enqueue(em, em->getPriority());
+			delete ptr;
 		}
 	}
 };
