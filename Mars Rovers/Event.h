@@ -15,6 +15,7 @@ protected:
 public:
 	Event(int EventDay, int ID) :EventDay(EventDay), ID(ID)
 	{
+		MarsStation* m;
 	};
 
 	int getED()
@@ -26,5 +27,7 @@ public:
 	{
 		return ID;
 	}
+
 	virtual void Excute() = 0;
+	virtual ~Event() {};
 };
