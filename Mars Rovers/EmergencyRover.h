@@ -3,7 +3,7 @@
 
 class EmergencyRover :public Rover {
 private:
-	static int CE;
+	static int CE; 
 	static int Count;
 	static int SE;
 public:
@@ -13,17 +13,17 @@ public:
 		Count ++;
 	}
 
-	void setCE(int n)
+	static void setCE(int n)
 	{
 		CE = n;
 	}
 
-	void setCount(int n)
+	static void setCount(int n)
 	{
 		Count = n;
 	}
 
-	void setSE(int n)
+	static void setSE(int n)
 	{
 		SE = n;
 	}
@@ -49,9 +49,9 @@ public:
 		newm->assign(this);
 		double days = 2.0 * ((double)newm->getTLOC() * 25.0 / (double)SE);
 
-		if (days - (int)days != 0)
+		if (days - (int)days)
 			days = days + 1.0;
 
-		newm->setED(newm->getMDUR() + days);
+		newm->setED(newm->getMDUR() + (int)days);
 	}
 };

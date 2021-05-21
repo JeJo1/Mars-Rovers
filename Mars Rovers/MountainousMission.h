@@ -20,22 +20,23 @@ public:
 		Count--;
 	};
 
-	void Promote() 
+	static void Promote() 
 	{
 		PromotedCount++;
+		Count--;
 	}
 
-	void setCount(int n)
+	static void setCount(int n)
 	{
 		Count = n;
 	}
 
-	void setPromotedCount(int n)
+	static void setPromotedCount(int n)
 	{
 		PromotedCount = n;
 	}
 
-	void setAutoP(int n)
+	static void setAutoP(int n)
 	{
 		AutoPromotion = n;
 	}
@@ -57,4 +58,3 @@ public:
 	
 
 };
-int MountainousMission::Count = 0;//del

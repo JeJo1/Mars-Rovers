@@ -2,16 +2,16 @@
 #include"Event.h"
 #include "MarsStation.h"
 
-class PrompteEvent :public Event
+class PromotionEvent :public Event
 {
 public:
-	PrompteEvent(int EventDay, int ID) :Event(EventDay, ID, m)
+	PromotionEvent(int EventDay, int ID) :Event(EventDay, ID)
 	{};
 
-	~PrompteEvent()
+	~PromotionEvent()
 	{};
 
-	void Excute()
+	void Execute()
 	{
 		MountainousMission* ptr = m->getMMWL().remove(getID());
 		if (ptr == NULL)
@@ -19,7 +19,7 @@ public:
 		else
 		{
 			ptr->Promote();
-			EmergencyMission* em = new EmergencyMission(getED(), getID(),em->getTLOC(),em->getMDUR(),em->getSIG());
+			EmergencyMission* em = new EmergencyMission(getED(), getID(), ptr->getTLOC(), ptr->getMDUR(), ptr->getSIG());
 			m->getEMWL().enqueue(em, em->getPriority());
 			delete ptr;
 		}

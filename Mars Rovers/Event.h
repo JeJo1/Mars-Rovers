@@ -1,5 +1,4 @@
 #pragma once
-
 #include"DataStructures/List.h"
 #include"DataStructures/Queue.h"
 #include"DataStructures/PriorityQueue.h"
@@ -11,10 +10,15 @@ private:
 	int EventDay;   //The event day
 	int ID;        //The ID of the mission
 protected:
-	MarsStation* m;
+	static MarsStation* m;
 public:
-	Event(int EventDay, int ID, MarsStation* m) :EventDay(EventDay), ID(ID), m()
-	{};
+	Event(int EventDay, int ID) :EventDay(EventDay), ID(ID)
+	{}
+
+	static void setStation(MarsStation* ptr) 
+	{
+		m = ptr;
+	}
 
 	int getED()
 	{
@@ -26,6 +30,6 @@ public:
 		return ID;
 	}
 
-	virtual void Excute() = 0;
+	virtual void Execute() = 0;
 	virtual ~Event() {};
 };

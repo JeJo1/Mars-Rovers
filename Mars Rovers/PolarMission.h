@@ -11,12 +11,13 @@ public:
 	{
 		Count++;
 	}
+
 	~PolarMission()
 	{
 		Count--;
 	};
 
-	void setCount(int n)
+	static void setCount(int n)
 	{
 		Count = n;
 	}

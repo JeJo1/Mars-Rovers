@@ -140,9 +140,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MarsStation.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CancelEvent.h" />
+    <ClInclude Include="CancelationEvent.h" />
     <ClInclude Include="DataStructures\List.h" />
     <ClInclude Include="DataStructures\ListADT.h" />
     <ClInclude Include="DataStructures\Node.h" />
@@ -160,8 +161,9 @@
     <ClInclude Include="MountainousRover.h" />
     <ClInclude Include="PolarMission.h" />
     <ClInclude Include="PolarRover.h" />
-    <ClInclude Include="PrompteEvent.h" />
+    <ClInclude Include="PromotionEvent.h" />
     <ClInclude Include="Rover.h" />
+    <ClInclude Include="UIClass.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

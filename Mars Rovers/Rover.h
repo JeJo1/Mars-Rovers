@@ -30,6 +30,10 @@ public:
 		m = newm;
 	}
 
+	static void setN(int n) {
+		N = n;
+	}
+
 	static int getN() 
 	{
 		return N;
@@ -48,6 +52,10 @@ public:
 	Mission* getMission() const 
 	{
 		return m;
+	}
+
+	int getMissionCount() const {
+		return Mission_Count;
 	}
 
 	bool operator <= (const Rover& obj) const

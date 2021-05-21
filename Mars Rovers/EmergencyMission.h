@@ -13,6 +13,7 @@ public:
 	{
 		Count++;
 		//TODO: Construct a priority Eqn and set the priority
+		priority = -1;
 	};
 
 	~EmergencyMission() 
@@ -25,7 +26,7 @@ public:
 		return priority;
 	}
 
-	void setCount(int n)
+	static void setCount(int n)
 	{
 		Count = n;
 	}

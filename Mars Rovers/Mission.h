@@ -47,6 +47,10 @@ public:
 		return ID == id;
 	}
 
+	bool operator == (const Mission& obj) const {
+		return ID == obj.ID;
+	}
+
 	int getFD() const
 	{
 		return Formulation_Day;

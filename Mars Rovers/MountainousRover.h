@@ -13,17 +13,17 @@ public:
 		Count++;
 	}
 
-	void setCM(int n)
+	static void setCM(int n)
 	{
 		CM = n;
 	}
 
-	void setCount(int n)
+	static void setCount(int n)
 	{
 		Count = n;
 	}
 
-	void setSM(int n)
+	static void setSM(int n)
 	{
 		SM = n;
 	}
@@ -49,9 +49,9 @@ public:
 		newm->assign(this);
 		double days = 2.0 * ((double)newm->getTLOC() * 25.0 / (double)SM);
 
-		if (days - (int)days != 0)
+		if (days - (int)days)
 			days = days + 1.0;
 
-		newm->setED(newm->getMDUR() + days);
+		newm->setED(newm->getMDUR() + (int)days);
 	}
 };

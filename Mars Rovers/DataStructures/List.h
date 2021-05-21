@@ -4,7 +4,7 @@
 
 
 template <typename T>
-class List: public ListADT<T> {
+class List : public ListADT<T> {
 private:
 
 	Node<T>* head;
@@ -13,7 +13,7 @@ private:
 		if (pos < 0)
 			return NULL;
 
-		if (pos == 0||!head)
+		if (pos == 0 || !head)
 			return head;
 
 		Node<T>* ptr = head->getNext();
@@ -27,6 +27,22 @@ public:
 
 	List() {
 		head = NULL;
+	}
+
+	List(const List& rhs) {
+		if (!rhs.head) {
+			head = NULL;
+			return;
+		}
+		
+		head = new Node<T>(NULL, rhs.head->getData());
+
+		Node<T>* ptr1 = head, * ptr2 = rhs.head;
+		
+		while (ptr2 = ptr2->getNext()) {
+			ptr1->setNext(new Node<T>(NULL, ptr2->getData()));
+			ptr1 = ptr1->getNext();
+		}
 	}
 
 	bool isEmpty() {
@@ -164,7 +180,7 @@ public:
 		return data;
 	}
 
-	/*bool removeAt(int pos) {
+	bool removeAt(int pos) {
 		if (!head)
 			return false;
 
@@ -189,7 +205,7 @@ public:
 		delete temp;
 
 		return true;
-	}*/
+	}
 
 	~List() {
 		Node<T>* temp;

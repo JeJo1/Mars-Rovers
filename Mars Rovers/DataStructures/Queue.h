@@ -14,6 +14,24 @@ public:
 		tail = NULL;
 	}
 
+	Queue(const Queue& rhs) {
+		if (!rhs.head) {
+			tail = head = NULL;
+			return;
+		}
+
+		head = new Node<T>(NULL, rhs.head->getData());
+
+		Node<T>* ptr1 = head, * ptr2 = rhs.head;
+
+		while (ptr2 = ptr2->getNext()) {
+			ptr1->setNext(new Node<T>(NULL, ptr2->getData()));
+			ptr1 = ptr1->getNext();
+		}
+
+		tail = ptr1;
+	}
+
 	bool enqueue(T* itm) {
 		if (!tail) {
 			tail = head = new Node<T>;

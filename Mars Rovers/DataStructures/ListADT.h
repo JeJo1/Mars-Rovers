@@ -11,6 +11,6 @@ public:
 	virtual T* getItemAt(int) const = 0;
 	virtual void insert(T*) = 0;
 	virtual void insertLast(T*) = 0;
-	//virtual bool removeAt(int) = 0;
+	virtual bool removeAt(int) = 0;
 	virtual ~ListADT() {};
 };

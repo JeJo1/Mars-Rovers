@@ -2,16 +2,16 @@
 #include "Event.h"
 #include "MarsStation.h"
 
-class CancelEvent : public Event
+class CancelationEvent : public Event
 {
 public:
-	CancelEvent(int EventDay, int ID) :Event(EventDay, ID, m)
+	CancelationEvent(int EventDay, int ID) :Event(EventDay, ID)
 	{};
 
-	~CancelEvent()
+	~CancelationEvent()
 	{};
 
-	void Excute()
+	void Execute()
 	{	
 		MountainousMission* ptr = m->getMMWL().remove(getID());
 		if (ptr != NULL)

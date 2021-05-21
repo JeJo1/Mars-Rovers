@@ -13,17 +13,17 @@ public:
 		Count++;
 	}
 
-	void setCP(int n)
+	static void setCP(int n)
 	{
 		CP = n;
 	}
 
-	void setCount(int n)
+	static void setCount(int n)
 	{
 		Count = n;
 	}
 
-	void setSP(int n)
+	static void setSP(int n)
 	{
 		SP = n;
 	}
@@ -49,9 +49,9 @@ public:
 		newm->assign(this);
 		double days = 2.0 * ((double)newm->getTLOC() * 25.0 / (double)SP);
 
-		if (days - (int)days != 0)
+		if (days - (int)days)
 			days = days + 1.0;
 
-		newm->setED(newm->getMDUR() + days);
+		newm->setED(newm->getMDUR() + (int)days);
 	}
 };

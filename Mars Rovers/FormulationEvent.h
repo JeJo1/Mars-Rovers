@@ -10,14 +10,14 @@ private:
 	int MDut;    //Mission duration 
 	int sig;     //The mission’s significance
 public:
-	FormulationEvent(int EventDay, int ID, char Typ, int TLoc, int MDut, int sig)
-		:Event(EventDay, ID ,m), Typ(Typ), TLoc(TLoc), MDut(MDut), sig(sig)
+	FormulationEvent(char Typ, int EventDay, int ID, int TLoc, int MDut, int sig)
+		:Event(EventDay, ID), Typ(Typ), TLoc(TLoc), MDut(MDut), sig(sig)
 	{};
 
 	~FormulationEvent()
 	{};
 
-	void Excute()
+	void Execute()
 	{
 		if (Typ == 'M')
 		{

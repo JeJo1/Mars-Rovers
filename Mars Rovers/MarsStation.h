@@ -1,20 +1,26 @@
 #pragma once
 
+#include "Event.h"
 #include "DataStructures\List.h"
 #include "DataStructures\Queue.h"
 #include "DataStructures\PriorityQueue.h"
 
-#include "Event.h"
 #include "EmergencyMission.h"
 #include "MountainousMission.h"
 #include "PolarMission.h"
 #include "EmergencyRover.h"
 #include "MountainousRover.h"
 #include "PolarRover.h"
-
-
-class Event;//
-
+ 
+class Event;
+class Mission;
+class EmergencyMission;
+class MountainousMission;
+class PolarMission;
+class Rover;
+class PolarRover;
+class EmergencyRover;
+class MountainousRover;
 
 class MarsStation{
 private:
@@ -32,61 +38,24 @@ private:
 	Queue<PolarRover> pRCL;					//Polar Rovers Checkup List
 	List<Rover> RPL;						//Rovers in Progress List
 	int currentDay;
+
+	void readFile();
+	
+	void Return_From_Checkup();
+	void Return_From_Missions();
+	void Execute_Events();
+	void Auto_Promote();
+	void Assign_Missions();
+	bool isDone();
 public:
-	MarsStation() 
-	{
-		MountainousMission* m = new MountainousMission(1, 1, 1, 1, 1);
-		MountainousMission* m2 = new MountainousMission(6, 3, 1, 1, 1);
-		std::cout << mMWL.getLength() << std::endl;
-		mMWL.insertLast(m);
-		mMWL.insertLast(m2);
-		std::cout << mMWL.getLength() << std::endl;
-		mMWL.remove(2);
-		std::cout << mMWL.getLength() << std::endl;
-		mMWL.remove(3);
-		std::cout << mMWL.getLength() << std::endl;
-		MountainousMission* ptr = mMWL.remove(1);
-		std::cout << m << std:: endl;
-		std::cout << ptr << std::endl;
-		std::cout << mMWL.getLength() << std::endl;
+	MarsStation();
 
+	~MarsStation();
 
-		Rover r1, r2;
-		r1.assign(m);
-		r2.assign(m2);
+	bool mainfunc();
 
-		std::cout << RPL.getLength() << std::endl;
-		RPL.insert(&r1);
-		RPL.insert(&r2);
-		
-
-		Rover* ptr1 = RPL.removeFirst();
-		std::cout << RPL.getLength() << std::endl;
-		std::cout << ptr1 << std::endl;
-		std::cout << &r1 << std::endl;
-		RPL.removeFirst();
-
-		std::cout << RPL.getLength() << std::endl;//del
-
-
-		currentDay = 0;
-
-	}
-
-	PriorityQueue<EmergencyMission>& getEMWL()
-	{
-		return eMWL;
-	}
-
-	List<MountainousMission>& getMMWL()
-	{
-		return mMWL;
-	}
-
-	Queue<PolarMission>& getPMWL()
-	{
-		return pMWL;
-	}
-
-
+	PriorityQueue<EmergencyMission>& getEMWL();
+	List<MountainousMission>& getMMWL();
+	Queue<PolarMission>& getPMWL();
+	
 };
