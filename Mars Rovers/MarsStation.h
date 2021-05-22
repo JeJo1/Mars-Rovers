@@ -12,15 +12,6 @@
 #include "MountainousRover.h"
 #include "PolarRover.h"
  
-class Event;
-class Mission;
-class EmergencyMission;
-class MountainousMission;
-class PolarMission;
-class Rover;
-class PolarRover;
-class EmergencyRover;
-class MountainousRover;
 
 class MarsStation{
 private:

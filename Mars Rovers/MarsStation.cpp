@@ -140,7 +140,7 @@ void MarsStation::Auto_Promote() {
 	while ((m = mMWL.getItemAt(i)) && currentDay - m->getFD() == MountainousMission::getAutoP()) {
 		mMWL.removeAt(i++);
 		m->Promote();
-		EmergencyMission* em = new EmergencyMission(currentDay, m->getID(), m->getTLOC(), m->getMDUR(), m->getSIG());
+		EmergencyMission* em = new EmergencyMission(m->getFD(), m->getID(), m->getTLOC(), m->getMDUR(), m->getSIG());
 		eMWL.enqueue(em, em->getPriority());
 		delete m;
 	}
