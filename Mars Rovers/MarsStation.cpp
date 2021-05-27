@@ -2,6 +2,9 @@
 #include "FormulationEvent.h"
 #include "CancelationEvent.h"
 #include "PromotionEvent.h"
+#include "fstream"
+#include"iostream"
+using namespace std;
 
 int EmergencyMission::Count = 0;
 int MountainousMission::Count = 0;
@@ -21,18 +24,28 @@ int Rover::N = 0;
 MarsStation* Event::m = 0;
 
 void MarsStation::readFile() {
+	ifstream inputFile("InputSample.txt");
+
 	int M,
 		P,
 		E,
-		SM,
-		SP,
-		SE,
-		N,
-		CM,
-		CP,
-		CE,
+		SM,          
+		SP,          
+		SE,        
+		N,          
+		CM,         
+		CP,          
+		CE,          
 		AutoP,
-		EventCnt;
+		EventCnt,
+		ED,
+		ID,
+		TLOC,
+		MDUR,
+		SIG;
+
+	char typeE,          //Type of event(F, C or P)
+		TYP;             //Type of mission(M,P or E)
 
 	//TODO::	1. Read info from the file and inititalize the above ints
 	//			2. Construct events and add them to the list
@@ -54,12 +67,60 @@ void MarsStation::readFile() {
 	MountainousRover::setCM(CM);
 	Event::setStation(this);
 
+	if (!inputFile.eof())
+	{
+		inputFile >> M;
+		inputFile >> P;
+		inputFile >> E;
+		inputFile >> SM;
+		inputFile >> SP;
+		inputFile >> SE;
+		inputFile >> N;
+		inputFile >> CM;
+		inputFile >> CP;
+		inputFile >> CE;
+		inputFile >> AutoP;
+		inputFile >> EventCnt;
+
+		for (int i = 0; i < EventCnt; i++)
+		{
+		    inputFile >> typeE;
+			if (typeE == 'F')
+			{
+				inputFile >> TYP;
+				inputFile >> ED;
+				inputFile >> ID;
+				inputFile >> TLOC;
+				inputFile >> MDUR;
+				inputFile >> SIG;
+				FormulationEvent* f = new FormulationEvent(TYP, ED, ID, TLOC, MDUR, SIG);
+				Events.enqueue(f);
+			}
+			else if (typeE == 'C')
+			{
+				inputFile >> ED;
+				inputFile >> ID;
+				CancelationEvent* c = new CancelationEvent(ED, ID);
+				Events.enqueue(c);
+			}
+			else if (typeE == 'P')
+			{
+				inputFile >> ED;
+				inputFile >> ID;
+				PromotionEvent* p = new PromotionEvent(ED, ID);
+				Events.enqueue(p);
+			}
+		}
+	}
+
 	for (int i = 0; i < P; i++)
 		pRWL.enqueue(new PolarRover);
 	for (int i = 0; i < E; i++)
 		eRWL.enqueue(new EmergencyRover);
 	for (int i = 0; i < M; i++)
 		mRWL.enqueue(new MountainousRover);
+
+	inputFile.close();
 }
 
 void MarsStation::Return_From_Checkup() {
