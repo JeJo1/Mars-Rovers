@@ -47,7 +47,7 @@ public:
 	{
 		Rover::assign(newm);
 		newm->assign(this);
-		double days = 2.0 * ((double)newm->getTLOC() * 25.0 / (double)SM);
+		double days = 2.0 * (double)newm->getTLOC() / ((double) SM * 25.0);
 
 		if (days - (int)days)
 			days = days + 1.0;

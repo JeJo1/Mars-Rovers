@@ -47,26 +47,6 @@ void MarsStation::readFile() {
 	char typeE,          //Type of event(F, C or P)
 		TYP;             //Type of mission(M,P or E)
 
-	//TODO::	1. Read info from the file and inititalize the above ints
-	//			2. Construct events and add them to the list
-
-	EmergencyMission::setCount(0);
-	MountainousMission::setCount(0);
-	MountainousMission::setPromotedCount(0);
-	MountainousMission::setAutoP(AutoP);
-	PolarMission::setCount(0);
-	Rover::setN(N);
-	PolarRover::setCount(P);
-	PolarRover::setSP(SP);
-	PolarRover::setCP(CP);
-	EmergencyRover::setCount(E);
-	EmergencyRover::setSE(SE);
-	EmergencyRover::setCE(CE);
-	MountainousRover::setCount(M);
-	MountainousRover::setSM(SM);
-	MountainousRover::setCM(CM);
-	Event::setStation(this);
-
 	if (!inputFile.eof())
 	{
 		inputFile >> M;
@@ -96,7 +76,7 @@ void MarsStation::readFile() {
 				FormulationEvent* f = new FormulationEvent(TYP, ED, ID, TLOC, MDUR, SIG);
 				Events.enqueue(f);
 			}
-			else if (typeE == 'C')
+			else if (typeE == 'X')
 			{
 				inputFile >> ED;
 				inputFile >> ID;
@@ -112,6 +92,23 @@ void MarsStation::readFile() {
 			}
 		}
 	}
+
+	EmergencyMission::setCount(0);
+	MountainousMission::setCount(0);
+	MountainousMission::setPromotedCount(0);
+	MountainousMission::setAutoP(AutoP);
+	PolarMission::setCount(0);
+	Rover::setN(N);
+	PolarRover::setCount(P);
+	PolarRover::setSP(SP);
+	PolarRover::setCP(CP);
+	EmergencyRover::setCount(E);
+	EmergencyRover::setSE(SE);
+	EmergencyRover::setCE(CE);
+	MountainousRover::setCount(M);
+	MountainousRover::setSM(SM);
+	MountainousRover::setCM(CM);
+	Event::setStation(this);
 
 	for (int i = 0; i < P; i++)
 		pRWL.enqueue(new PolarRover);
@@ -285,15 +282,6 @@ bool MarsStation::isDone() {
 MarsStation::MarsStation() {
 	readFile();
 	currentDay = 0;
-
-	/*Events.enqueue(new FormulationEvent('M', 2, 1, 100, 4, 5));
-	Events.enqueue(new FormulationEvent('M', 5, 2, 250, 4, 4));
-	Events.enqueue(new FormulationEvent('E', 5, 3, 500, 6, 3));
-	Events.enqueue(new FormulationEvent('P', 6, 4, 900, 7, 4));
-	Events.enqueue(new CancelationEvent(10, 1));
-	Events.enqueue(new FormulationEvent('M', 18, 5, 560, 5, 9));
-	Events.enqueue(new PromotionEvent(19, 2));
-	Events.enqueue(new FormulationEvent('P', 25, 6, 190, 3, 1));*/
 }
 
 MarsStation::~MarsStation() {
