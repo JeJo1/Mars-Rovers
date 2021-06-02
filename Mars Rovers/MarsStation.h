@@ -48,5 +48,17 @@ public:
 	PriorityQueue<EmergencyMission>& getEMWL();
 	List<MountainousMission>& getMMWL();
 	Queue<PolarMission>& getPMWL();
-	
+	List<Mission>& getMPL();
+	List<Rover>& getRPL();
+	Queue<Mission>& getCML();
+	Queue<EmergencyRover>& getERWL();				//Emergency Rovers Waiting List
+	Queue<MountainousRover>& getMRWL();
+	Queue<PolarRover>& getPRWL();					
+	Queue<EmergencyRover>& getERCL();				
+	Queue<MountainousRover>& getMRCL();	
+	Queue<PolarRover> & getPRCL();
+	int getCurrentday();
+	int getMMWLnum();
+	int getPMWLnum();
+	int getEMWLnum();
 };

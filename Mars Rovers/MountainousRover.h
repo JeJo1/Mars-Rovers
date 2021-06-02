@@ -6,11 +6,13 @@ private:
 	static int CM;
 	static int Count;
 	static int SM;
+	int ID;
 public:
 
 	MountainousRover()
 	{
-		Count++;
+		ID = ++Count;
+
 	}
 
 	static void setCM(int n)
@@ -53,5 +55,9 @@ public:
 			days = days + 1.0;
 
 		newm->setED(newm->getMDUR() + (int)days);
+	}
+	int getID()const
+	{
+		return ID;
 	}
 };

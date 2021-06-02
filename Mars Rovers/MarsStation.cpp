@@ -323,3 +323,56 @@ Queue<PolarMission>& MarsStation::getPMWL()
 {
 	return pMWL;
 }
+int MarsStation::getCurrentday()
+{
+	return currentDay;
+}
+int MarsStation::getEMWLnum()
+{
+	return eMWL.getLength();
+}
+int MarsStation::getMMWLnum()
+{
+	return(mMWL.getLength());
+	
+}
+int MarsStation::getPMWLnum()
+{
+	return pMWL.getLength();
+}
+List<Mission> & MarsStation::getMPL()
+{
+	return MPL;
+}
+List<Rover>& MarsStation::getRPL()
+{
+	return RPL;
+}
+Queue<Mission>& MarsStation::getCML()
+{
+	return CML;
+}
+Queue<PolarRover>& MarsStation::getPRWL()
+{
+	return pRWL;
+}
+Queue<EmergencyRover>& MarsStation::getERCL()
+{
+	return eRCL;
+}
+Queue<PolarRover>& MarsStation::getPRCL()
+{
+	return pRCL;
+}
+Queue<MountainousRover>& MarsStation::getMRCL()
+{
+	 return mRCL;
+}
+Queue<EmergencyRover>& MarsStation::getERWL()
+{
+	return eRWL;
+}
+Queue<MountainousRover>& MarsStation::getMRWL()
+{
+	return mRWL;
+}

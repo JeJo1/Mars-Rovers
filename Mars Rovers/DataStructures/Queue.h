@@ -81,5 +81,19 @@ public:
 			head = temp;
 		}
 	}
+	int getLength() const {
+		if (!head)
+			return 0;
 
+		int count = 1;
+
+		Node<T>* ptr = head->getNext();
+
+		while (ptr) {
+			count++;
+			ptr = ptr->getNext();
+		}
+
+		return count;
+	}
 };
