@@ -57,6 +57,7 @@ public:
 		Node<T>* temp = head->getNext();
 		delete head;
 		head = temp;
+		temp = nullptr;
 		return true;
 
 	}
