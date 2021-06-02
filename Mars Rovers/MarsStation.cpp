@@ -21,6 +21,7 @@ int PolarRover::CP = 0;
 int PolarRover::Count = 0;
 int PolarRover::SP = 0;
 int Rover::N = 0;
+int Rover::Count = 0;
 MarsStation* Event::m = 0;
 
 void MarsStation::readFile() {

@@ -6,12 +6,11 @@ private:
 	static int CE; 
 	static int Count;
 	static int SE;
-	int ID;
 public:
 
 	EmergencyRover() 
 	{
-		ID=++Count;
+		
 	}
 
 	static void setCE(int n)
@@ -54,9 +53,5 @@ public:
 			days = days + 1.0;
 
 		newm->setED(newm->getMDUR() + (int)days);
-	}
-	int getID()const
-	{
-		return ID;
 	}
 };

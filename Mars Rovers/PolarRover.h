@@ -6,12 +6,11 @@ private:
 	static int CP;
 	static int Count;
 	static int SP;
-	int ID;
 public:
 
 	PolarRover()
 	{
-		ID = ++Count;
+		
 	}
 
 	static void setCP(int n)
@@ -55,8 +54,5 @@ public:
 
 		newm->setED(newm->getMDUR() + (int)days);
 	}
-	int getID()const
-	{
-		return ID;
-	}
+	
 };

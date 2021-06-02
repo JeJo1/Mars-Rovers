@@ -7,9 +7,12 @@ private:
 	static int N; //number of missions the rover completes before performing a checkup
 	int Mission_Count,
 	Checkup_Start_Day;
+	static int Count;
+	int ID;
 public:
 	Rover() 
 	{
+		ID = ++Count;
 		m = NULL;
 		Mission_Count = 0;
 		Checkup_Start_Day = -1;
@@ -61,6 +64,10 @@ public:
 	bool operator <= (const Rover& obj) const
 	{
 		return *m <= *obj.m;
+	}
+
+	int getID() {
+		return ID;
 	}
 
 	virtual ~Rover(){}
