@@ -7,16 +7,18 @@ class UIClass {
 private:
 	int mode;
 	MarsStation* MarsStationPtr;
+	bool once;
 public:
 	UIClass(MarsStation* MarsStationPtr) :MarsStationPtr(MarsStationPtr)
 	{
 		mode = 1;
+		once = false;
 	}
-	int SelectMode()
+	void SelectMode()
 	{
-		cout << "Enter Mode:";
+		cout << "Enter Mode: ";
 		cin >> mode;
-		return mode;
+		cout << endl;
 	}
 	void Ready()
 	{
@@ -35,7 +37,6 @@ public:
 	}
 	void Output()
 	{
-		bool once = false;
 		if (mode == 1 || mode == 2)
 		{
 			Mission* mm;
@@ -242,9 +243,8 @@ public:
 		}
 		else if (mode == 3 && !once)
 		{	
-		cout << "Silent Mode" <<endl <<"Simulation Starts..."<<endl<<"Simulation ends, Qutput file created"<<endl;
+			cout << "Silent Mode" <<endl <<"Simulation Starts..."<<endl<<"Simulation ends, Qutput file created"<<endl;
 			once = true;
-
 		}
 	}
 };

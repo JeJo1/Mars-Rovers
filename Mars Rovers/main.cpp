@@ -7,11 +7,8 @@ using namespace std;
 int main() 
 {
 	MarsStation Station;
-	UIClass UI(&Station);
-	UI.SelectMode();
-	while (!Station.mainfunc()) {
-		UI.Ready();
-		UI.Output();
+	while (!Station.isDone()) {
+		Station.mainfunc();
 	}
 	return 0;
 }

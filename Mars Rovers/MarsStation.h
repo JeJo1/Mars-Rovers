@@ -11,7 +11,7 @@
 #include "EmergencyRover.h"
 #include "MountainousRover.h"
 #include "PolarRover.h"
- 
+class UIClass;
 
 class MarsStation{
 private:
@@ -28,6 +28,8 @@ private:
 	Queue<MountainousRover> mRCL;			//Mountainous Rovers Checkup List
 	Queue<PolarRover> pRCL;					//Polar Rovers Checkup List
 	List<Rover> RPL;						//Rovers in Progress List
+
+	UIClass *UI;
 	int currentDay;
 
 	void readFile();
@@ -38,13 +40,14 @@ private:
 	void Execute_Events();
 	void Auto_Promote();
 	void Assign_Missions();
-	bool isDone();
+	
 public:
 	MarsStation();
 
 	~MarsStation();
 
-	bool mainfunc();
+	void mainfunc();
+	bool isDone();
 
 	PriorityQueue<EmergencyMission>& getEMWL();
 	List<MountainousMission>& getMMWL();

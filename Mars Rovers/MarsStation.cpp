@@ -2,8 +2,10 @@
 #include "FormulationEvent.h"
 #include "CancelationEvent.h"
 #include "PromotionEvent.h"
+#include "UIClass.h"
 #include "fstream"
 #include"iostream"
+
 using namespace std;
 
 int EmergencyMission::Count = 0;
@@ -275,12 +277,18 @@ void MarsStation::Assign_Missions() {
 }
 
 bool MarsStation::isDone() {
-	return Events.isEmpty() && eMWL.isEmpty() && mMWL.isEmpty() && pMWL.isEmpty() && MPL.isEmpty() && RPL.isEmpty() && eRCL.isEmpty() && mRCL.isEmpty() && pRCL.isEmpty();
+	if (Events.isEmpty() && eMWL.isEmpty() && mMWL.isEmpty() && pMWL.isEmpty() && MPL.isEmpty() && RPL.isEmpty() && eRCL.isEmpty() && mRCL.isEmpty() && pRCL.isEmpty()) {
+		writeFile();
+		return true;
+	}
+	return false;
 }
 
 
 
 MarsStation::MarsStation() {
+	UI = new UIClass(this);
+	UI->SelectMode();
 	readFile();
 	currentDay = 0;
 }
@@ -300,14 +308,15 @@ MarsStation::~MarsStation() {
 			delete pR;
 	}
 
-bool MarsStation::mainfunc() { //TODO: name it a cooler name
+void MarsStation::mainfunc() { //TODO: name it a cooler name
+	UI->Ready();
 	currentDay++;
 	Return_From_Checkup();
 	Return_From_Missions();
 	Execute_Events();
 	Auto_Promote();
 	Assign_Missions();
-	return isDone();
+	UI->Output();
 }
 
 PriorityQueue<EmergencyMission>& MarsStation::getEMWL()
@@ -319,7 +328,6 @@ List<MountainousMission>& MarsStation::getMMWL()
 {
 	return mMWL;
 }
-
 Queue<PolarMission>& MarsStation::getPMWL()
 {
 	return pMWL;
@@ -449,7 +457,7 @@ void MarsStation::writeFile()
 		}
 	}
 
-	while (temp.isEmpty())
+	while (!temp.isEmpty())
 	{
 		temp.dequeue(m1);
 		outputFile << m1->getCD() << "    "
@@ -468,19 +476,19 @@ void MarsStation::writeFile()
 	outputFile << "Missions: " << totalM << " "
 		<< "[M: " << mm->getCount()
 		<< ", P: " << pm->getCount()
-		<< ", E: " << em->getCount << "]" << endl;
+		<< ", E: " << em->getCount() << "]" << endl;
 
 	totalR = er->getCount() + mr->getCount() + pr->getCount();
 	outputFile << "Rovers: " << totalR << "     "
 		<< "[M: " << mr->getCount()
 		<< ", P: " << pr->getCount()
-		<< ", E: " << er->getCount << "]" << endl;
+		<< ", E: " << er->getCount() << "]" << endl;
 
 	avgWait = sumWD / totalM;
 	avgExec = sumED / totalM;
 	outputFile << "Avg Wait = " << avgWait << ", " << "Avg Exec = " << avgExec << endl;
 
-	Auto = (mm->getPromotedCount() / (mm->getPromotedCount() + mm->getCount())) * 100;
+	Auto = (mm->getPromotedCount() / (mm->getCount())) * 100;
 	outputFile << "Auto-promoted: " << Auto << "%" << endl;
 
 	outputFile.close();
