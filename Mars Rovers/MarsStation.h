@@ -31,7 +31,8 @@ private:
 	int currentDay;
 
 	void readFile();
-	
+	void writeFile();
+
 	void Return_From_Checkup();
 	void Return_From_Missions();
 	void Execute_Events();

@@ -377,3 +377,111 @@ Queue<MountainousRover>& MarsStation::getMRWL()
 {
 	return mRWL;
 }
+
+
+void MarsStation::writeFile()
+{
+	ofstream outputFile("outputSample.txt");
+
+	Queue<Mission> tempQ = CML;
+	Queue<Mission> temp;
+	Mission* m1;
+	Mission* m2;
+	EmergencyMission* em;
+	MountainousMission* mm;
+	PolarMission* pm;
+	EmergencyRover* er;
+	MountainousRover* mr;
+	PolarRover* pr;
+	int totalM,  //Total number of missions
+		totalR,  //Total number of rovers
+		Auto,    //Percentage of automatically-promoted missions
+		avgWait,
+		avgExec,
+		sumWD = 0,
+		sumED = 0;
+
+	outputFile << "CD" << "   "
+		<< "ID" << "   "
+		<< "FD" << "   "
+		<< "WD" << "   "
+		<< "ED" << endl;
+
+	while (!tempQ.isEmpty())
+	{
+		tempQ.dequeue(m1);
+		if (tempQ.isEmpty())
+		{
+			temp.enqueue(m1);
+			return;
+		}
+		tempQ.dequeue(m2);
+		if (m1->getCD() == m2->getCD())
+		{
+			while (!tempQ.isEmpty())
+			{
+				if (m1->getFD() < m2->getFD())
+				{
+					temp.enqueue(m1);
+					tempQ.dequeue(m1);
+				}
+				else
+				{
+					temp.enqueue(m2);
+					tempQ.dequeue(m2);
+				}
+			}
+			if (m1->getFD() > m2->getFD())
+			{
+				temp.enqueue(m2);
+				temp.enqueue(m1);
+			}
+			else
+			{
+				temp.enqueue(m1);
+				temp.enqueue(m2);
+			}
+		}
+		else
+		{
+			temp.enqueue(m1);
+			temp.enqueue(m2);
+		}
+	}
+
+	while (temp.isEmpty())
+	{
+		temp.dequeue(m1);
+		outputFile << m1->getCD() << "    "
+			<< m1->getID() << "    "
+			<< m1->getFD() << "    "
+			<< m1->getWD() << "    "
+			<< m1->getED() << endl;
+		sumED = sumED + m1->getED();
+		sumWD = sumWD + m1->getWD();
+	}
+
+	outputFile << "………………………………………………" << endl;
+	outputFile << "………………………………………………" << endl;
+
+	totalM = em->getCount() + mm->getCount() + pm->getCount();
+	outputFile << "Missions: " << totalM << " "
+		<< "[M: " << mm->getCount()
+		<< ", P: " << pm->getCount()
+		<< ", E: " << em->getCount << "]" << endl;
+
+	totalR = er->getCount() + mr->getCount() + pr->getCount();
+	outputFile << "Rovers: " << totalR << "     "
+		<< "[M: " << mr->getCount()
+		<< ", P: " << pr->getCount()
+		<< ", E: " << er->getCount << "]" << endl;
+
+	avgWait = sumWD / totalM;
+	avgExec = sumED / totalM;
+	outputFile << "Avg Wait = " << avgWait << ", " << "Avg Exec = " << avgExec << endl;
+
+	Auto = (mm->getPromotedCount() / (mm->getPromotedCount() + mm->getCount())) * 100;
+	outputFile << "Auto-promoted: " << Auto << "%" << endl;
+
+	outputFile.close();
+}
