@@ -142,7 +142,7 @@ public:
 			{
 				cout << "{" << MPL.getItemAt(ii)->getID() << "/" << RPL.getItemAt(ii)->getID();
 				ii++;
-				for (int i = 0; i < countMPL; i++)
+				for (int i = ii; i < countMPL; i++)
 				{
 					if (dynamic_cast<MountainousMission*>(MPL.getItemAt(i)))
 						cout << "," << MPL.getItemAt(i)->getID() << "/" << RPL.getItemAt(i)->getID();
@@ -151,7 +151,7 @@ public:
 			}
 			cout << endl;
 			cout << "-----------------------------------------------------------------------------------" << endl;
-			cout << eRWL.getLength() + pRWL.getLength() + mRCL.getLength() << " Available Rover: ";
+			cout << eRWL.getLength() + pRWL.getLength() + mRWL.getLength() << " Available Rover: ";
 			if (!eRWL.isEmpty())
 			{
 				cout << "[";

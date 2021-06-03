@@ -23,7 +23,6 @@ public:
 	static void Promote() 
 	{
 		PromotedCount++;
-		Count--;
 	}
 
 	static void setCount(int n)
@@ -51,10 +50,8 @@ public:
 		return PromotedCount;
 	}
 
-	static int getAutoP() 
+	static int getAutoP()
 	{
 		return AutoPromotion;
 	}
-	
-
 };

@@ -217,7 +217,7 @@ void MarsStation::Assign_Missions() {
 
 	bool canProceed = true;
 
-	while (eMWL.peek(eM) && eM->getFD() >= currentDay && canProceed) {
+	while (eMWL.peek(eM) && canProceed) {
 		canProceed = false;
 		if (eRWL.dequeue(eR)) {
 			eMWL.dequeue(eM);
@@ -245,7 +245,7 @@ void MarsStation::Assign_Missions() {
 		}
 	}
 
-	while (pMWL.peek(pM) && pM->getFD() >= currentDay && pRWL.dequeue(pR)) {
+	while (pMWL.peek(pM) && pRWL.dequeue(pR)) {
 		pMWL.dequeue(pM);
 		pM->setWD(currentDay - pM->getFD());
 		pR->assign(pM);
@@ -255,7 +255,7 @@ void MarsStation::Assign_Missions() {
 
 	canProceed = true;
 
-	while ((mM = mMWL.peekFirst()) && mM->getFD() >= currentDay && canProceed) {
+	while ((mM = mMWL.peekFirst()) && canProceed) {
 		canProceed = false;
 		if (mRWL.dequeue(mR)) {
 			mMWL.removeFirst();
