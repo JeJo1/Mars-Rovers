@@ -308,7 +308,7 @@ MarsStation::~MarsStation() {
 			delete pR;
 	}
 
-void MarsStation::mainfunc() { //TODO: name it a cooler name
+void MarsStation::PerformNextDay() { //TODO: name it a cooler name
 	UI->Ready();
 	currentDay++;
 	Return_From_Checkup();
@@ -415,7 +415,7 @@ void MarsStation::writeFile()
 		<< "WD" << "   "
 		<< "ED" << endl;
 
-	while (!tempQ.isEmpty())
+	/*while (!tempQ.isEmpty())
 	{
 		tempQ.dequeue(m1);
 		if (tempQ.isEmpty())
@@ -455,11 +455,11 @@ void MarsStation::writeFile()
 			temp.enqueue(m1);
 			temp.enqueue(m2);
 		}
-	}
+	}*/
 
-	while (!temp.isEmpty())
+	while (!tempQ.isEmpty())
 	{
-		temp.dequeue(m1);
+		tempQ.dequeue(m1);
 		outputFile << m1->getCD() << "    "
 			<< m1->getID() << "    "
 			<< m1->getFD() << "    "

@@ -32,6 +32,30 @@ public:
 		tail = ptr1;
 	}
 
+	const Queue<T>& operator = (const Queue<T>& rhs) {
+		if (this == &rhs)
+			return rhs;
+
+		~Queue();
+
+
+		if (!rhs.head) {
+			tail = head = NULL;
+			return rhs;
+		}
+
+		head = new Node<T>(NULL, rhs.head->getData());
+
+		Node<T>* ptr1 = head, * ptr2 = rhs.head;
+
+		while (ptr2 = ptr2->getNext()) {
+			ptr1->setNext(new Node<T>(NULL, ptr2->getData()));
+			ptr1 = ptr1->getNext();
+		}
+
+		tail = ptr1;
+	}
+
 	bool enqueue(T* itm) {
 		if (!tail) {
 			tail = head = new Node<T>;
@@ -82,6 +106,7 @@ public:
 			head = temp;
 		}
 	}
+
 	int getLength() const {
 		if (!head)
 			return 0;

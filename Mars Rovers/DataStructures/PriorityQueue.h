@@ -30,6 +30,29 @@ public:
 		}
 	}
 
+	const PriorityQueue<T>& operator = (const PriorityQueue<T>& rhs) {
+		if (this == &rhs)
+			return rhs;
+
+		~PriorityQueue();
+
+		if (!rhs.head) {
+			head = NULL;
+			return rhs;
+		}
+
+		head = new Node<T>(NULL, rhs.head->getData());
+		head->setPriority(rhs.head->getPriority());
+
+		Node<T>* ptr1 = head, * ptr2 = rhs.head;
+
+		while (ptr2 = ptr2->getNext()) {
+			ptr1->setNext(new Node<T>(NULL, ptr2->getData()));
+			ptr1 = ptr1->getNext();
+			ptr1->setPriority(ptr2->getPriority());
+		}
+	}
+
 	bool enqueue(T* itm, int priority) {
 		if (!head) {
 			head = new Node<T>;

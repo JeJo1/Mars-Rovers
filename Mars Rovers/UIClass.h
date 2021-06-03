@@ -1,8 +1,10 @@
 #pragma once
 #include <iostream>
-using namespace std;
 #include<windows.h>
 #include "MarsStation.h"
+
+using namespace std;
+
 class UIClass {
 private:
 	int mode;
@@ -183,7 +185,7 @@ public:
 				}
 				cout << "}";
 			}
-			cout<< endl;
+			cout << endl;
 			cout << "-----------------------------------------------------------------------------------" << endl;
 			cout << eRCL.getLength() + pRCL.getLength() + mRWL.getLength() << " In-Checkup Rover: ";
 			if (!eRCL.isEmpty())
@@ -219,11 +221,11 @@ public:
 				}
 				cout << "}";
 			}
-			cout<< endl;
+			cout << endl;
 			cout << "-----------------------------------------------------------------------------------" << endl;
 			int countCML = CML.getLength();
 			cout << countCML << " Completed Missions: ";
-			for (int i = 0; i <countCML; i++)
+			for (int i = 0; i < countCML; i++)
 			{
 				CML.dequeue(mm);
 				if (dynamic_cast<MountainousMission*>(mm))
@@ -242,9 +244,12 @@ public:
 			cout << endl;
 		}
 		else if (mode == 3 && !once)
-		{	
-			cout << "Silent Mode" <<endl <<"Simulation Starts..."<<endl<<"Simulation ends, Qutput file created"<<endl;
+		{
+			cout << "Silent Mode" << endl << "Simulation Starts..." << endl;
 			once = true;
+		}
+		else if (mode == 3 && MarsStationPtr->isDone()) {
+			cout << "Simulation ends, Output file created" << endl;
 		}
 	}
 };

@@ -46,7 +46,7 @@ public:
 
 	~MarsStation();
 
-	void mainfunc();
+	void PerformNextDay();
 	bool isDone();
 
 	PriorityQueue<EmergencyMission>& getEMWL();

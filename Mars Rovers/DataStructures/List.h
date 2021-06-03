@@ -46,6 +46,28 @@ public:
 		}
 	}
 
+	const List<T>& operator = (const List<T>& rhs) {
+		if (this == &rhs)
+			return rhs;
+		
+		~List();
+
+		if (!rhs.head) {
+			head = NULL;
+			return rhs;
+		}
+
+		head = new Node<T>(NULL, rhs.head->getData());
+
+		Node<T>* ptr1 = head, * ptr2 = rhs.head;
+
+		while (ptr2->getNext()) {
+			ptr2 = ptr2->getNext();
+			ptr1->setNext(new Node<T>(NULL, ptr2->getData()));
+			ptr1 = ptr1->getNext();
+		}
+	}
+
 	bool isEmpty() {
 		return head == NULL;
 	}

@@ -21,7 +21,7 @@ public:
 	{
 		if (Typ == 'M')
 		{
-			MountainousMission* mm = new MountainousMission(getED(),getID(),TLoc,MDut,sig);
+			MountainousMission* mm = new MountainousMission(getED(), getID(), TLoc, MDut, sig);
 			m->getMMWL().insertLast(mm);
 		}
 		else if (Typ == 'P')
