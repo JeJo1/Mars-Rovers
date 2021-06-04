@@ -18,9 +18,13 @@ public:
 	}
 	void SelectMode()
 	{
-		cout << "Enter Mode: ";
-		cin >> mode;
-		cout << endl;
+
+		do
+		{
+			cout << "Enter Mode: ";
+			cin >> mode;
+			cout << endl;
+		} while (mode>3||mode<1);
 	}
 	void Ready()
 	{
