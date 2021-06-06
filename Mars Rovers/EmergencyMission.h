@@ -12,10 +12,8 @@ public:
 		:Mission(Formulation_Day, ID, Target_Location, Mission_Duration, Significance)
 	{
 		Count++;
-		priority = (Significance * (1 / Formulation_Day) * (Mission_Duration * Target_Location));
+		priority = Significance * (1 / (double)Formulation_Day) * Mission_Duration * Target_Location;
 		priority = priority / 1000;
-		//TODO: Construct a priority Eqn and set the priority
-		//priority = -1;
 	};
 
 	~EmergencyMission() 

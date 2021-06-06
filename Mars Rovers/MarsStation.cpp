@@ -27,25 +27,33 @@ int Rover::Count = 0;
 MarsStation* Event::m = 0;
 
 void MarsStation::readFile() {
-	ifstream inputFile("InputSample.txt");
 
-	int M,
-		P,
-		E,
-		SM,          
-		SP,          
-		SE,        
-		N,          
-		CM,         
-		CP,          
-		CE,          
-		AutoP,
-		EventCnt,
-		ED,
-		ID,
-		TLOC,
-		MDUR,
-		SIG;
+	string txt;
+	txt = UI->readFileName();
+	ifstream inputFile(txt);
+
+	while (!inputFile.is_open()) {
+		txt = UI->readFileName(false);
+		ifstream inputFile(txt);
+	}
+
+	int M = 0,
+		P = 0,
+		E = 0,
+		SM = 0,
+		SP = 0,
+		SE = 0,
+		N = 0,
+		CM = 0,
+		CP = 0,
+		CE = 0,
+		AutoP = 0,
+		EventCnt = 0,
+		ED = 0,
+		ID = 0,
+		TLOC = 0,
+		MDUR = 0,
+		SIG = 0;
 
 	char typeE,          //Type of event(F, C or P)
 		TYP;             //Type of mission(M,P or E)
@@ -196,10 +204,9 @@ void MarsStation::Execute_Events() {
 }
 
 void MarsStation::Auto_Promote() {
-	int i = 0;
 	MountainousMission* m;
-	while ((m = mMWL.getItemAt(i)) && currentDay - m->getFD() == MountainousMission::getAutoP()) {
-		mMWL.removeAt(i++);
+	while ((m = mMWL.peekFirst()) && currentDay - m->getFD() == MountainousMission::getAutoP()) {
+		mMWL.removeFirst();
 		m->Promote();
 		EmergencyMission* em = new EmergencyMission(m->getFD(), m->getID(), m->getTLOC(), m->getMDUR(), m->getSIG());
 		eMWL.enqueue(em, em->getPriority());
@@ -288,8 +295,8 @@ bool MarsStation::isDone() {
 
 MarsStation::MarsStation() {
 	UI = new UIClass(this);
-	UI->SelectMode();
 	readFile();
+	UI->SelectMode();
 	currentDay = 0;
 }
 
@@ -306,6 +313,7 @@ MarsStation::~MarsStation() {
 			delete mR;
 		while (pRWL.dequeue(pR))
 			delete pR;
+		delete UI;
 	}
 
 void MarsStation::PerformNextDay() { //TODO: name it a cooler name
@@ -394,7 +402,7 @@ void MarsStation::writeFile()
 	Queue<Mission> tempQ = CML;
 	Queue<Mission> temp;
 	Mission* m1;
-	Mission* m2;
+	//Mission* m2;
 	EmergencyMission* em;
 	MountainousMission* mm;
 	PolarMission* pm;
@@ -403,11 +411,12 @@ void MarsStation::writeFile()
 	PolarRover* pr;
 	int totalM,  //Total number of missions
 		totalR,  //Total number of rovers
-		Auto,    //Percentage of automatically-promoted missions
-		avgWait,
-		avgExec,
 		sumWD = 0,
 		sumED = 0;
+
+	double 	Auto,    //Percentage of automatically-promoted missions
+		avgWait,
+		avgExec;
 
 	outputFile << "CD" << "   "
 		<< "ID" << "   "
@@ -484,11 +493,11 @@ void MarsStation::writeFile()
 		<< ", P: " << pr->getCount()
 		<< ", E: " << er->getCount() << "]" << endl;
 
-	avgWait = sumWD / totalM;
-	avgExec = sumED / totalM;
+	avgWait = (double)sumWD / totalM;
+	avgExec = (double)sumED / totalM;
 	outputFile << "Avg Wait = " << avgWait << ", " << "Avg Exec = " << avgExec << endl;
 
-	Auto = (mm->getPromotedCount() / (mm->getCount())) * 100;
+	Auto = ((double)mm->getPromotedCount() / mm->getCount()) * 100;
 	outputFile << "Auto-promoted: " << Auto << "%" << endl;
 
 	outputFile.close();

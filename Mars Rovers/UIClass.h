@@ -16,9 +16,24 @@ public:
 		mode = 1;
 		once = false;
 	}
+	string readFileName(bool found = true) {
+		string txt;
+
+		switch (found) {
+		case 0:
+		{
+			cout << "File not fount!" << endl;
+		}
+		case 1:
+		{
+			cout << "Enter FileName: ";
+			cin >> txt;
+		}
+		}
+		return 	txt += ".txt";;
+	}
 	void SelectMode()
 	{
-
 		do
 		{
 			cout << "Enter Mode: ";
@@ -59,7 +74,6 @@ public:
 			Queue<PolarRover> pRCL = MarsStationPtr->getPRCL();	             	//Polar Rovers Checkup List
 			List<Rover> RPL = MarsStationPtr->getRPL();
 			EmergencyMission* eM;
-			MountainousMission* mM;
 			PolarMission* pM;
 			EmergencyRover* eR;
 			MountainousRover* mR;
