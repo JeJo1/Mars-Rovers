@@ -14,9 +14,7 @@ public:
 	void Execute()
 	{
 		MountainousMission* ptr = m->getMMWL().remove(getID());
-		if (ptr == NULL)
-			return;
-		else
+		if (ptr)
 		{
 			EmergencyMission* em = new EmergencyMission(ptr->getFD(), getID(), ptr->getTLOC(), ptr->getMDUR(), ptr->getSIG());
 			m->getEMWL().enqueue(em, em->getPriority());

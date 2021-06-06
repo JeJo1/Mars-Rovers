@@ -88,8 +88,6 @@ public:
 		return count;
 	}
 
-
-
 	/*int getPositionOf(T* itm) const {
 		if (!head)
 			return -1;
@@ -237,6 +235,5 @@ public:
 			delete head;
 			head = temp;
 		}
-
 	}
 };

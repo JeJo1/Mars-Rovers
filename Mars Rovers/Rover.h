@@ -18,6 +18,10 @@ public:
 		Checkup_Start_Day = -1;
 	}
 
+	static int getCount() {
+		return Count;
+	}
+
 	void IncrementMissionCount() 
 	{
 		Mission_Count++;

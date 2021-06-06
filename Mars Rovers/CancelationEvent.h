@@ -16,7 +16,5 @@ public:
 		MountainousMission* ptr = m->getMMWL().remove(getID());
 		if (ptr != NULL)
 			delete ptr;
-		else
-			return;
 	}
 };

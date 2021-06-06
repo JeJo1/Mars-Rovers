@@ -403,12 +403,7 @@ void MarsStation::writeFile()
 	Queue<Mission> temp;
 	Mission* m1;
 	//Mission* m2;
-	EmergencyMission* em;
-	MountainousMission* mm;
-	PolarMission* pm;
-	EmergencyRover* er;
-	MountainousRover* mr;
-	PolarRover* pr;
+
 	int totalM,  //Total number of missions
 		totalR,  //Total number of rovers
 		sumWD = 0,
@@ -481,23 +476,23 @@ void MarsStation::writeFile()
 	outputFile << "……………………………………………………………………………" << endl;
 	outputFile << "……………………………………………………………………………" << endl;
 
-	totalM = em->getCount() + mm->getCount() + pm->getCount();
+	totalM = MountainousMission::getCount() + PolarMission::getCount() + EmergencyMission::getCount();
 	outputFile << "Missions: " << totalM << " "
-		<< "[M: " << mm->getCount()
-		<< ", P: " << pm->getCount()
-		<< ", E: " << em->getCount() << "]" << endl;
+		<< "[M: " << MountainousMission::getCount()
+		<< ", P: " << PolarMission::getCount()
+		<< ", E: " << EmergencyMission::getCount() << "]" << endl;
 
-	totalR = er->getCount() + mr->getCount() + pr->getCount();
+	totalR = Rover::getCount();
 	outputFile << "Rovers: " << totalR << "     "
-		<< "[M: " << mr->getCount()
-		<< ", P: " << pr->getCount()
-		<< ", E: " << er->getCount() << "]" << endl;
+		<< "[M: " << MountainousRover::getCount()
+		<< ", P: " << PolarRover::getCount()
+		<< ", E: " << EmergencyRover::getCount() << "]" << endl;
 
 	avgWait = (double)sumWD / totalM;
 	avgExec = (double)sumED / totalM;
 	outputFile << "Avg Wait = " << avgWait << ", " << "Avg Exec = " << avgExec << endl;
 
-	Auto = ((double)mm->getPromotedCount() / mm->getCount()) * 100;
+	Auto = MountainousMission::getPromotedCount() * 100.0 / MountainousMission::getCount() ;
 	outputFile << "Auto-promoted: " << Auto << "%" << endl;
 
 	outputFile.close();
