@@ -6,7 +6,7 @@ private:
 
 	Node<T>* next;
 	T* data;
-	int priority;
+	double priority;
 
 public:
 
@@ -32,11 +32,11 @@ public:
 		data = newData;
 	}
 
-	int getPriority() const {
+	double getPriority() const {
 		return priority;
 	}
 
-	void setPriority(int newPriority) {
+	void setPriority(double newPriority) {
 		priority = newPriority;
 	}
 

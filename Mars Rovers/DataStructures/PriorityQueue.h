@@ -53,7 +53,7 @@ public:
 		}
 	}
 
-	bool enqueue(T* itm, int priority) {
+	bool enqueue(T* itm, double priority) {
 		if (!head) {
 			head = new Node<T>;
 			head->setData(itm);

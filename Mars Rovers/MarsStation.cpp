@@ -240,7 +240,7 @@ void MarsStation::Assign_Missions() {
 			eM->setWD(currentDay - eM->getFD());
 			pR->assign(eM);
 			MPL.insert(eM);
-			RPL.insert(mR);
+			RPL.insert(pR);
 			canProceed = true;
 		}
 	}
