@@ -469,8 +469,8 @@ void MarsStation::writeFile()
 		sumWD = sumWD + m1->getWD();
 	}
 
-	outputFile << "………………………………………………" << endl;
-	outputFile << "………………………………………………" << endl;
+	outputFile << "……………………………………………………………………………" << endl;
+	outputFile << "……………………………………………………………………………" << endl;
 
 	totalM = em->getCount() + mm->getCount() + pm->getCount();
 	outputFile << "Missions: " << totalM << " "
