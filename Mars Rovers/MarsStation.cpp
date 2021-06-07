@@ -66,20 +66,20 @@ void MarsStation::readFile() {
 	char typeE,				//Type of event(F, C or P)
 		TYP;				//Type of mission(M,P or E)
 	
-	if (!inputFile.eof()) 
+	if (!inputFile.eof())
 	{
-	inputFile >> M;
-	inputFile >> P;
-	inputFile >> E;
-	inputFile >> SM;
-	inputFile >> SP;
-	inputFile >> SE;
-	inputFile >> N;
-	inputFile >> CM;
-	inputFile >> CP;
-	inputFile >> CE;
-	inputFile >> AutoP;
-	inputFile >> EventCnt;
+		inputFile >> M;
+		inputFile >> P;
+		inputFile >> E;
+		inputFile >> SM;
+		inputFile >> SP;
+		inputFile >> SE;
+		inputFile >> N;
+		inputFile >> CM;
+		inputFile >> CP;
+		inputFile >> CE;
+		inputFile >> AutoP;
+		inputFile >> EventCnt;
 
 		for (int i = 0; i < EventCnt; i++)
 		{
