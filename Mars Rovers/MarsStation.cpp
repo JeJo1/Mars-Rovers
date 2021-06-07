@@ -30,7 +30,9 @@ void MarsStation::readFile() {
 
 	string txt;
 	txt = UI->readFileName();
-	ifstream inputFile(txt);
+	ifstream inputFile(txt, ios::binary);
+	inputFile.seekg(0, ios::end);
+	int file_size = inputFile.tellg();
 
 	while (!inputFile.is_open()) {
 		txt = UI->readFileName(false);
