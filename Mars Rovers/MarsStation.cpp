@@ -162,7 +162,6 @@ void MarsStation::writeFile()
 	Queue<Mission> tempQ = CML;
 	Queue<Mission> temp;
 	Mission* m1;
-	//Mission* m2;
 
 	int totalM = 0,  //Total number of missions
 		totalR = 0,  //Total number of rovers
@@ -179,47 +178,6 @@ void MarsStation::writeFile()
 		<< "WD" << "   "
 		<< "ED" << endl;
 
-	/*while (!tempQ.isEmpty())
-	{
-		tempQ.dequeue(m1);
-		if (tempQ.isEmpty())
-		{
-			temp.enqueue(m1);
-			return;
-		}
-		tempQ.dequeue(m2);
-		if (m1->getCD() == m2->getCD())
-		{
-			while (!tempQ.isEmpty())
-			{
-				if (m1->getFD() < m2->getFD())
-				{
-					temp.enqueue(m1);
-					tempQ.dequeue(m1);
-				}
-				else
-				{
-					temp.enqueue(m2);
-					tempQ.dequeue(m2);
-				}
-			}
-			if (m1->getFD() > m2->getFD())
-			{
-				temp.enqueue(m2);
-				temp.enqueue(m1);
-			}
-			else
-			{
-				temp.enqueue(m1);
-				temp.enqueue(m2);
-			}
-		}
-		else
-		{
-			temp.enqueue(m1);
-			temp.enqueue(m2);
-		}
-	}*/
 
 	while (!tempQ.isEmpty())
 	{
