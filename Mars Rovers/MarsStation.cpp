@@ -114,6 +114,11 @@ void MarsStation::readFile() {
 				inputFile >> ID;
 				PromotionEvent* p = new PromotionEvent(ED, ID);
 				Events.enqueue(p);
+
+				if (mCnt) {
+					mCnt--;
+					eCnt++;
+				}
 			}
 		}
 	}
