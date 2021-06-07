@@ -38,7 +38,7 @@ void MarsStation::readFile() {
 	}
 
 	inputFile.seekg(0, ios::end);
-	int file_size = inputFile.tellg();
+	int file_size = (int)inputFile.tellg();
 	inputFile = ifstream(txt);
 
 	int M = 0,
@@ -258,7 +258,7 @@ void MarsStation::Return_From_Missions() {
 		r = RPL.removeFirst();
 		r->IncrementMissionCount();
 		//If the rover needs checkup enqueue in checkup list
-		if (Rover::getN() == r->getMissionCount()) {
+		if (r && Rover::getN() == r->getMissionCount()) {
 			r->setCheckupStartDay(currentDay);
 
 			if (dynamic_cast<EmergencyRover*>(r))
