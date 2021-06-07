@@ -31,6 +31,7 @@ private:
 
 	UIClass *UI;
 	int currentDay;
+	bool validInput;
 
 	void readFile();
 	void writeFile();

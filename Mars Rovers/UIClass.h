@@ -16,7 +16,7 @@ public:
 		mode = 1;
 		once = false;
 	}
-	string readFileName(bool found = true) {
+	string readFileName(bool found = true) const{
 		string txt;
 
 		switch (found) {
@@ -32,6 +32,9 @@ public:
 		}
 		return 	txt += ".txt";;
 	}
+	void InvalidInputMessage() const{
+		cout << "Input is invalid" << endl;
+	}
 	void SelectMode()
 	{
 		do
@@ -41,7 +44,7 @@ public:
 			cout << endl;
 		} while (mode>3||mode<1);
 	}
-	void Ready()
+	void Ready() const
 	{
 		if (mode == 1)
 		{
@@ -205,7 +208,7 @@ public:
 			}
 			cout << endl;
 			cout << "-----------------------------------------------------------------------------------" << endl;
-			cout << eRCL.getLength() + pRCL.getLength() + mRWL.getLength() << " In-Checkup Rover: ";
+			cout << eRCL.getLength() + pRCL.getLength() + mRCL.getLength() << " In-Checkup Rover: ";
 			if (!eRCL.isEmpty())
 			{
 				cout << "[";

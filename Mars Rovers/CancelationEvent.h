@@ -13,7 +13,7 @@ public:
 
 	void Execute()
 	{	
-		MountainousMission* ptr = m->getMMWL().remove(getID());
+ 		MountainousMission* ptr = m->getMMWL().remove(getID());
 		if (ptr != NULL)
 			delete ptr;
 	}

@@ -55,8 +55,12 @@ void MarsStation::readFile() {
 		MDUR = 0,
 		SIG = 0;
 
-	char typeE,          //Type of event(F, C or P)
-		TYP;             //Type of mission(M,P or E)
+	int mCnt = 0,			//Potential mission count to check for validity of input
+		pCnt = 0,
+		eCnt = 0;  
+
+	char typeE,				//Type of event(F, C or P)
+		TYP;				//Type of mission(M,P or E)
 
 	if (!inputFile.eof())
 	{
@@ -86,6 +90,13 @@ void MarsStation::readFile() {
 				inputFile >> SIG;
 				FormulationEvent* f = new FormulationEvent(TYP, ED, ID, TLOC, MDUR, SIG);
 				Events.enqueue(f);
+
+				if (TYP == 'M')
+					mCnt++;
+				else if (TYP == 'P')
+					pCnt++;
+				else
+					eCnt++;
 			}
 			else if (typeE == 'X')
 			{
@@ -93,6 +104,9 @@ void MarsStation::readFile() {
 				inputFile >> ID;
 				CancelationEvent* c = new CancelationEvent(ED, ID);
 				Events.enqueue(c);
+
+				if (mCnt)
+					mCnt--;
 			}
 			else if (typeE == 'P')
 			{
@@ -129,6 +143,119 @@ void MarsStation::readFile() {
 		mRWL.enqueue(new MountainousRover);
 
 	inputFile.close();
+	validInput = !(!P && pCnt || !M && !E && (mCnt || eCnt));
+
+	if (!validInput) {
+		Event* e;
+		UI->InvalidInputMessage();
+		while (Events.dequeue(e))
+			delete e;
+	}
+}
+
+void MarsStation::writeFile()
+{
+	ofstream outputFile("outputSample.txt");
+
+	Queue<Mission> tempQ = CML;
+	Queue<Mission> temp;
+	Mission* m1;
+	//Mission* m2;
+
+	int totalM = 0,  //Total number of missions
+		totalR = 0,  //Total number of rovers
+		sumWD = 0,
+		sumED = 0;
+
+	double 	Auto = 0,    //Percentage of automatically-promoted missions
+		avgWait = 0,
+		avgExec = 0;
+
+	outputFile << "CD" << "   "
+		<< "ID" << "   "
+		<< "FD" << "   "
+		<< "WD" << "   "
+		<< "ED" << endl;
+
+	/*while (!tempQ.isEmpty())
+	{
+		tempQ.dequeue(m1);
+		if (tempQ.isEmpty())
+		{
+			temp.enqueue(m1);
+			return;
+		}
+		tempQ.dequeue(m2);
+		if (m1->getCD() == m2->getCD())
+		{
+			while (!tempQ.isEmpty())
+			{
+				if (m1->getFD() < m2->getFD())
+				{
+					temp.enqueue(m1);
+					tempQ.dequeue(m1);
+				}
+				else
+				{
+					temp.enqueue(m2);
+					tempQ.dequeue(m2);
+				}
+			}
+			if (m1->getFD() > m2->getFD())
+			{
+				temp.enqueue(m2);
+				temp.enqueue(m1);
+			}
+			else
+			{
+				temp.enqueue(m1);
+				temp.enqueue(m2);
+			}
+		}
+		else
+		{
+			temp.enqueue(m1);
+			temp.enqueue(m2);
+		}
+	}*/
+
+	while (!tempQ.isEmpty())
+	{
+		tempQ.dequeue(m1);
+		outputFile << m1->getCD() << "    "
+			<< m1->getID() << "    "
+			<< m1->getFD() << "    "
+			<< m1->getWD() << "    "
+			<< m1->getED() << endl;
+		sumED = sumED + m1->getED();
+		sumWD = sumWD + m1->getWD();
+	}
+
+	outputFile << "……………………………………………………………………………" << endl;
+	outputFile << "……………………………………………………………………………" << endl;
+
+	totalM = MountainousMission::getCount() + PolarMission::getCount() + EmergencyMission::getCount();
+	outputFile << "Missions: " << totalM << " "
+		<< "[M: " << MountainousMission::getCount()
+		<< ", P: " << PolarMission::getCount()
+		<< ", E: " << EmergencyMission::getCount() << "]" << endl;
+
+	totalR = Rover::getCount();
+	outputFile << "Rovers: " << totalR << "     "
+		<< "[M: " << MountainousRover::getCount()
+		<< ", P: " << PolarRover::getCount()
+		<< ", E: " << EmergencyRover::getCount() << "]" << endl;
+	if (totalM) {
+		avgWait = (double)sumWD / totalM;
+		avgExec = (double)sumED / totalM;
+	}
+	outputFile << "Avg Wait = " << avgWait << ", " << "Avg Exec = " << avgExec << endl;
+	if (true) {////
+		Auto = MountainousMission::getPromotedCount() * 100.0 / MountainousMission::getCount();
+	}
+	outputFile << "Auto-promoted: " << Auto << "%" << endl;
+
+	outputFile.close();
 }
 
 void MarsStation::Return_From_Checkup() {
@@ -285,18 +412,19 @@ void MarsStation::Assign_Missions() {
 
 bool MarsStation::isDone() {
 	if (Events.isEmpty() && eMWL.isEmpty() && mMWL.isEmpty() && pMWL.isEmpty() && MPL.isEmpty() && RPL.isEmpty() && eRCL.isEmpty() && mRCL.isEmpty() && pRCL.isEmpty()) {
-		writeFile();
+		if (validInput)
+			writeFile();
 		return true;
 	}
 	return false;
 }
 
 
-
 MarsStation::MarsStation() {
 	UI = new UIClass(this);
 	readFile();
-	UI->SelectMode();
+	if (validInput)
+		UI->SelectMode();
 	currentDay = 0;
 }
 
@@ -327,11 +455,11 @@ void MarsStation::PerformNextDay() { //TODO: name it a cooler name
 	UI->Output();
 }
 
+
 PriorityQueue<EmergencyMission>& MarsStation::getEMWL()
 {
 	return eMWL;
 }
-
 List<MountainousMission>& MarsStation::getMMWL()
 {
 	return mMWL;
@@ -392,108 +520,4 @@ Queue<EmergencyRover>& MarsStation::getERWL()
 Queue<MountainousRover>& MarsStation::getMRWL()
 {
 	return mRWL;
-}
-
-
-void MarsStation::writeFile()
-{
-	ofstream outputFile("outputSample.txt");
-
-	Queue<Mission> tempQ = CML;
-	Queue<Mission> temp;
-	Mission* m1;
-	//Mission* m2;
-
-	int totalM,  //Total number of missions
-		totalR,  //Total number of rovers
-		sumWD = 0,
-		sumED = 0;
-
-	double 	Auto,    //Percentage of automatically-promoted missions
-		avgWait,
-		avgExec;
-
-	outputFile << "CD" << "   "
-		<< "ID" << "   "
-		<< "FD" << "   "
-		<< "WD" << "   "
-		<< "ED" << endl;
-
-	/*while (!tempQ.isEmpty())
-	{
-		tempQ.dequeue(m1);
-		if (tempQ.isEmpty())
-		{
-			temp.enqueue(m1);
-			return;
-		}
-		tempQ.dequeue(m2);
-		if (m1->getCD() == m2->getCD())
-		{
-			while (!tempQ.isEmpty())
-			{
-				if (m1->getFD() < m2->getFD())
-				{
-					temp.enqueue(m1);
-					tempQ.dequeue(m1);
-				}
-				else
-				{
-					temp.enqueue(m2);
-					tempQ.dequeue(m2);
-				}
-			}
-			if (m1->getFD() > m2->getFD())
-			{
-				temp.enqueue(m2);
-				temp.enqueue(m1);
-			}
-			else
-			{
-				temp.enqueue(m1);
-				temp.enqueue(m2);
-			}
-		}
-		else
-		{
-			temp.enqueue(m1);
-			temp.enqueue(m2);
-		}
-	}*/
-
-	while (!tempQ.isEmpty())
-	{
-		tempQ.dequeue(m1);
-		outputFile << m1->getCD() << "    "
-			<< m1->getID() << "    "
-			<< m1->getFD() << "    "
-			<< m1->getWD() << "    "
-			<< m1->getED() << endl;
-		sumED = sumED + m1->getED();
-		sumWD = sumWD + m1->getWD();
-	}
-
-	outputFile << "……………………………………………………………………………" << endl;
-	outputFile << "……………………………………………………………………………" << endl;
-
-	totalM = MountainousMission::getCount() + PolarMission::getCount() + EmergencyMission::getCount();
-	outputFile << "Missions: " << totalM << " "
-		<< "[M: " << MountainousMission::getCount()
-		<< ", P: " << PolarMission::getCount()
-		<< ", E: " << EmergencyMission::getCount() << "]" << endl;
-
-	totalR = Rover::getCount();
-	outputFile << "Rovers: " << totalR << "     "
-		<< "[M: " << MountainousRover::getCount()
-		<< ", P: " << PolarRover::getCount()
-		<< ", E: " << EmergencyRover::getCount() << "]" << endl;
-
-	avgWait = (double)sumWD / totalM;
-	avgExec = (double)sumED / totalM;
-	outputFile << "Avg Wait = " << avgWait << ", " << "Avg Exec = " << avgExec << endl;
-
-	Auto = MountainousMission::getPromotedCount() * 100.0 / MountainousMission::getCount() ;
-	outputFile << "Auto-promoted: " << Auto << "%" << endl;
-
-	outputFile.close();
 }
