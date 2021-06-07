@@ -30,14 +30,16 @@ void MarsStation::readFile() {
 
 	string txt;
 	txt = UI->readFileName();
-	ifstream inputFile(txt, ios::binary);
-	inputFile.seekg(0, ios::end);
-	int file_size = inputFile.tellg();
+	ifstream inputFile(txt);
 
 	while (!inputFile.is_open()) {
 		txt = UI->readFileName(false);
-		ifstream inputFile(txt);
+		inputFile = ifstream(txt);
 	}
+
+	inputFile.seekg(0, ios::end);
+	int file_size = inputFile.tellg();
+	inputFile = ifstream(txt);
 
 	int M = 0,
 		P = 0,
@@ -59,29 +61,29 @@ void MarsStation::readFile() {
 
 	int mCnt = 0,			//Potential mission count to check for validity of input
 		pCnt = 0,
-		eCnt = 0;  
+		eCnt = 0;
 
 	char typeE,				//Type of event(F, C or P)
 		TYP;				//Type of mission(M,P or E)
-
-	if (!inputFile.eof())
+	
+	if (!inputFile.eof()) 
 	{
-		inputFile >> M;
-		inputFile >> P;
-		inputFile >> E;
-		inputFile >> SM;
-		inputFile >> SP;
-		inputFile >> SE;
-		inputFile >> N;
-		inputFile >> CM;
-		inputFile >> CP;
-		inputFile >> CE;
-		inputFile >> AutoP;
-		inputFile >> EventCnt;
+	inputFile >> M;
+	inputFile >> P;
+	inputFile >> E;
+	inputFile >> SM;
+	inputFile >> SP;
+	inputFile >> SE;
+	inputFile >> N;
+	inputFile >> CM;
+	inputFile >> CP;
+	inputFile >> CE;
+	inputFile >> AutoP;
+	inputFile >> EventCnt;
 
 		for (int i = 0; i < EventCnt; i++)
 		{
-		    inputFile >> typeE;
+			inputFile >> typeE;
 			if (typeE == 'F')
 			{
 				inputFile >> TYP;
@@ -106,9 +108,6 @@ void MarsStation::readFile() {
 				inputFile >> ID;
 				CancelationEvent* c = new CancelationEvent(ED, ID);
 				Events.enqueue(c);
-
-				if (mCnt)
-					mCnt--;
 			}
 			else if (typeE == 'P')
 			{
@@ -116,11 +115,6 @@ void MarsStation::readFile() {
 				inputFile >> ID;
 				PromotionEvent* p = new PromotionEvent(ED, ID);
 				Events.enqueue(p);
-
-				if (mCnt) {
-					mCnt--;
-					eCnt++;
-				}
 			}
 		}
 	}
@@ -150,7 +144,8 @@ void MarsStation::readFile() {
 		mRWL.enqueue(new MountainousRover);
 
 	inputFile.close();
-	validInput = !(!P && pCnt || !M && !E && (mCnt || eCnt));
+
+	validInput = !(!P && pCnt || !M && !E && mCnt || !M && !E && !P && eCnt || !file_size);
 
 	if (!validInput) {
 		Event* e;
