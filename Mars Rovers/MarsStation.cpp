@@ -210,10 +210,20 @@ void MarsStation::writeFile()
 		avgExec = (double)sumED / totalM;
 	}
 	outputFile << "Avg Wait = " << avgWait << ", " << "Avg Exec = " << avgExec << endl;
-	if (true) {////
-		Auto = MountainousMission::getPromotedCount() * 100.0 / MountainousMission::getCount();
+
+	if (MountainousMission::getPromotedCount() && !MountainousMission::getCount()) 
+	{
+		outputFile << "Auto-promoted: inf %" << endl;
 	}
-	outputFile << "Auto-promoted: " << Auto << "%" << endl;
+	else if (!MountainousMission::getPromotedCount() && !MountainousMission::getCount()) 
+	{
+		outputFile << "Auto-promoted: " << 0 << "%" << endl;
+	}
+	else  
+	{
+		Auto = MountainousMission::getPromotedCount() * 100.0 / MountainousMission::getCount();
+		outputFile << "Auto-promoted: " << Auto << "%" << endl;
+	}
 
 	outputFile.close();
 }
